@@ -7,7 +7,7 @@ import com.todo.service.TodoSortByName;
 
 public class TodoList {
 	private List<TodoItem> list;
-
+	
 	public TodoList() {
 		this.list = new ArrayList<TodoItem>();
 	}
@@ -32,7 +32,6 @@ public class TodoList {
 
 	public void sortByName() {
 		Collections.sort(list, new TodoSortByName());
-
 	}
 	
 	public void reverseList() {
@@ -52,5 +51,9 @@ public class TodoList {
 			if (title.equals(item.getTitle())) return true;
 		}
 		return false;
+	}
+	
+	public int size() {
+		return list.size();
 	}
 }

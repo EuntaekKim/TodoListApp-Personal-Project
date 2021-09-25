@@ -9,24 +9,28 @@ public class TodoItem {
     private String desc;
     private String dateString;
     private Date current_date;
+    private String category;
+    private String due_date;
 
-
-    public TodoItem(String title, String desc){
+    public TodoItem(String title, String desc, String category, String due_date){
         this.title=title;
         this.desc=desc;
         this.current_date=new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         this.dateString = format.format(current_date);
+        this.category = category;
+        this.due_date = due_date;
     }
     
-    public TodoItem(String title, String desc, String dateString){
+    public TodoItem(String title, String desc, String dateString, String category, String due_date){
         this.title=title;
         this.desc=desc;
         this.dateString = dateString;
+        this.category = category;
+        this.due_date = due_date;
         try {
         	SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             this.current_date = format.parse(dateString);
-
         }
         catch(ParseException e) {
             e.printStackTrace();
@@ -65,14 +69,30 @@ public class TodoItem {
 		this.dateString = dateString;
 	}
 
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getDue_date() {
+		return due_date;
+	}
+
+	public void setDue_date(String due_date) {
+		this.due_date = due_date;
+	}
+
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return "[" + title + "] " + desc + " - " + dateString;
+		return ". [" + category + "] " + title + " - "+ desc + " - " + due_date + " - " + dateString;
 	}
     
 	public String toSaveString() {
-		return title + "##" + desc + "##" + dateString + "\n" ;
+		return "##" + category + "##" + title + "##" + desc + "##" + due_date + "##" + dateString + "\n" ;
 	}
     
     
