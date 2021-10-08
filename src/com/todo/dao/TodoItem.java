@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.text.ParseException;
 
 public class TodoItem {
+	private int id;
     private String title;
     private String desc;
     private String dateString;
@@ -37,7 +38,31 @@ public class TodoItem {
         }
     }
     
-    public String getTitle() {
+    public TodoItem(int id, String title, String desc, String dateString, String category, String due_date){
+    	this.id = id;
+        this.title=title;
+        this.desc=desc;
+        this.dateString = dateString;
+        this.category = category;
+        this.due_date = due_date;
+        try {
+        	SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            this.current_date = format.parse(dateString);
+        }
+        catch(ParseException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getTitle() {
         return title;
     }
 
@@ -88,7 +113,7 @@ public class TodoItem {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return ". [" + category + "] " + title + " - "+ desc + " - " + due_date + " - " + dateString;
+		return id + ". [" + category + "] " + title + " - "+ desc + " - " + due_date + " - " + dateString;
 	}
     
 	public String toSaveString() {
