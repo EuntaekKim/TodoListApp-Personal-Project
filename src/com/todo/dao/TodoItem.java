@@ -12,8 +12,12 @@ public class TodoItem {
     private Date current_date;
     private String category;
     private String due_date;
+    private String time;
+    private int is_complete;
+    private int importance;
+    
 
-    public TodoItem(String title, String desc, String category, String due_date){
+    public TodoItem(String title, String desc, String category, String due_date, String time, int is_complete, int importance){
         this.title=title;
         this.desc=desc;
         this.current_date=new Date();
@@ -21,14 +25,33 @@ public class TodoItem {
         this.dateString = format.format(current_date);
         this.category = category;
         this.due_date = due_date;
+        this.time = time;
+        this.importance = importance;
+        this.is_complete = is_complete;
     }
     
-    public TodoItem(String title, String desc, String dateString, String category, String due_date){
+    public TodoItem(String title, String desc, String category, String due_date, String time, int importance){
+        this.title=title;
+        this.desc=desc;
+        this.current_date=new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        this.dateString = format.format(current_date);
+        this.category = category;
+        this.due_date = due_date;
+        this.time = time;
+        this.importance = importance;
+        this.is_complete = 0;
+    }
+    
+    public TodoItem(String title, String desc, String dateString, String category, String due_date, String time, int is_complete, int importance){
         this.title=title;
         this.desc=desc;
         this.dateString = dateString;
         this.category = category;
         this.due_date = due_date;
+        this.time = time;
+        this.importance = importance;
+        this.is_complete = is_complete;
         try {
         	SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             this.current_date = format.parse(dateString);
@@ -38,13 +61,16 @@ public class TodoItem {
         }
     }
     
-    public TodoItem(int id, String title, String desc, String dateString, String category, String due_date){
+    public TodoItem(int id, String title, String desc, String dateString, String category, String due_date, String time, int is_complete, int importance){
     	this.id = id;
         this.title=title;
         this.desc=desc;
         this.dateString = dateString;
         this.category = category;
         this.due_date = due_date;
+        this.time = time;
+        this.importance = importance;
+        this.is_complete = is_complete;
         try {
         	SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             this.current_date = format.parse(dateString);
@@ -110,10 +136,40 @@ public class TodoItem {
 		this.due_date = due_date;
 	}
 
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+
+	public int getIs_complete() {
+		return is_complete;
+	}
+
+	public void setIs_complete(int is_complete) {
+		this.is_complete = is_complete;
+	}
+
+	public int getImportance() {
+		return importance;
+	}
+
+	public void setImportance(int importance) {
+		this.importance = importance;
+	}
+
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return id + ". [" + category + "] " + title + " - "+ desc + " - " + due_date + " - " + dateString;
+		String complete;
+		if(is_complete == 1) {
+			complete = "[V]";
+		} else {
+			complete = "";
+		}
+		return id + " [" + category + "] " + title + complete + " - "+ desc + " - " + due_date + " - " + dateString + " - 소요시간 : " + time + " - 중요도(1~10) : " + importance;
 	}
     
 	public String toSaveString() {

@@ -34,8 +34,29 @@ public class TodoMain {
 				TodoUtil.deleteItem(l);
 				break;
 				
+			case "del_multi":
+				TodoUtil.deleteMultiItem(l);
+				break;
+				
+			case "del_complete":
+				TodoUtil.deleteCompleteItem(l);
+				break;
+				
+			case "del_past":
+				TodoUtil.deletePastItem(l);
+				break;
+				
 			case "edit":
 				TodoUtil.updateItem(l);
+				break;
+				
+			case "comp":
+				int id = sc.nextInt();
+				TodoUtil.completeItem(l, id);
+				break;
+			
+			case "comp_multi":
+				TodoUtil.completeMultiItem(l);
 				break;
 				
 			case "ls":
@@ -76,13 +97,19 @@ public class TodoMain {
 				TodoUtil.listAll(l, "due_date", 0);
 				break;
 				
+			case "ls_comp": 
+				TodoUtil.find_comp(l);
+				break;
+				
+			case "ls_today": 
+				TodoUtil.ListToday(l);
+				break;
+				
 			case "help":
 				Menu.displaymenu();
 				break;
 
 			case "exit":
-				TodoUtil.saveList(l, "todolist.txt");
-				System.out.println("모든 데이터가 저장되었습니다.");
 				quit = true;
 				break;
 
